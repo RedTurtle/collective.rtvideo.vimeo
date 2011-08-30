@@ -13,6 +13,8 @@ setup(name='collective.rtvideo.vimeo',
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
+        "Topic :: Multimedia :: Video",
+        "License :: OSI Approved :: GNU General Public License (GPL)",
         ],
       keywords='plone plonegov video embed vimeo',
       author='RedTurtle Technology',
@@ -25,11 +27,10 @@ setup(name='collective.rtvideo.vimeo',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'redturtle.video>=0.6.0',
       ],
       entry_points="""
       # -*- Entry points: -*-
-
       [z3c.autoinclude.plugin]
       target = plone
       """,
