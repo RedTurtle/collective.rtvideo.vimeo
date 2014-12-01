@@ -33,15 +33,17 @@ class VimeoEmbedCode(VideoEmbedCode):
     ...                                         IVideoEmbedCode, 
     ...                                         name = 'vimeo.com')
     >>> adapter.getVideoLink()
-    'http://vimeo.com/moogaloop.swf?clip_id=2075738&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1'
+    'https://player.vimeo.com/video/2075738'
 
     >>> print adapter()
-    <object width="400" height="225">
-       <param name="allowfullscreen" value="true" />
-       <param name="allowscriptaccess" value="always" />
-       <param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=2075738&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1" />
-       <embed type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="225" src="http://vimeo.com/moogaloop.swf?clip_id=2075738&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1"></embed>
-    </object>
+    <div class="vimeoEmbedWrapper">
+    <iframe width="400" height="225" frameborder="0"
+            webkitallowfullscreen="webkitallowfullscreen"
+            mozallowfullscreen="mozallowfullscreen"
+            allowfullscreen="allowfullscreen"
+            src="https://player.vimeo.com/video/2075738">
+    </iframe>
+    </div>
     <BLANKLINE>
 
     """
@@ -49,7 +51,4 @@ class VimeoEmbedCode(VideoEmbedCode):
 
     def getVideoLink(self):
         video_id = urlparse(self.context.getRemoteUrl())[2][1:]
-        return "http://vimeo.com/moogaloop.swf?clip_id=%s&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" % video_id
-
-
- 
+        return "https://player.vimeo.com/video/%s" % video_id
