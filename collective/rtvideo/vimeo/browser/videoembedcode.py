@@ -3,9 +3,13 @@
 from urlparse import urlparse
 from zope.interface import implements
 from redturtle.video.interfaces import IVideoEmbedCode
-from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
-
 from redturtle.video.browser.videoembedcode import VideoEmbedCode
+try:
+    from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+except ImportError:
+    # Plone < 4.1
+    from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
+
 
 class VimeoEmbedCode(VideoEmbedCode):
     """ VimeoEmbedCode 

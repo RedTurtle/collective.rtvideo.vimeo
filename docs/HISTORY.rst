@@ -8,6 +8,8 @@ Changelog
   [keul]
 * Video provided in https
   [keul]
+* Plone 4.3 compatibility
+  [keul]
 
 0.1.0 (2011-08-31)
 ------------------
