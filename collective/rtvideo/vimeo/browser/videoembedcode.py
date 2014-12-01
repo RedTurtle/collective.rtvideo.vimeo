@@ -33,7 +33,9 @@ class VimeoEmbedCode(VideoEmbedCode):
     ...         return self.size['height']
 
     >>> remotevideo = RemoteVideo()
-    >>> adapter = getMultiAdapter((remotevideo, TestRequest()), 
+    >>> request = TestRequest()
+    >>> request.QUERY_STRING = ''
+    >>> adapter = getMultiAdapter((remotevideo, request), 
     ...                                         IVideoEmbedCode, 
     ...                                         name = 'vimeo.com')
     >>> adapter.getVideoLink()
@@ -50,9 +52,46 @@ class VimeoEmbedCode(VideoEmbedCode):
     </div>
     <BLANKLINE>
 
+    Now check if the autoplay parameter is used when putted into the video source URL.
+
+    >>> remotevideo.remoteUrl += '?autoplay=1'
+    >>> print adapter()
+    <div class="vimeoEmbedWrapper">
+    <iframe width="400" height="225" frameborder="0"
+            webkitallowfullscreen="webkitallowfullscreen"
+            mozallowfullscreen="mozallowfullscreen"
+            allowfullscreen="allowfullscreen"
+            src="https://player.vimeo.com/video/2075738?autoplay=1">
+    </iframe>
+    </div>
+    <BLANKLINE>
+
+    If the request URL is provided with a "autoplay=1" parameter, autoplay is included
+
+    >>> remotevideo.remoteUrl = 'http://vimeo.com/2075738'
+    >>> request.QUERY_STRING = '?foo=5&autoplay=1&bar=7'
+    >>> print adapter()
+    <div class="vimeoEmbedWrapper">
+    <iframe width="400" height="225" frameborder="0"
+            webkitallowfullscreen="webkitallowfullscreen"
+            mozallowfullscreen="mozallowfullscreen"
+            allowfullscreen="allowfullscreen"
+            src="https://player.vimeo.com/video/2075738?autoplay=1">
+    </iframe>
+    </div>
+    <BLANKLINE>
+
     """
     template = ViewPageTemplateFile('vimeoembedcode_template.pt')
 
     def getVideoLink(self):
         video_id = urlparse(self.context.getRemoteUrl())[2][1:]
-        return "https://player.vimeo.com/video/%s" % video_id
+        video_url = "https://player.vimeo.com/video/%s" % video_id
+        return self.check_autoplay(video_url)
+
+    def check_autoplay(self, url):
+        """Check if the we need to add the autoplay parameter, and add it to the URL"""
+        if self.context.getRemoteUrl().lower().find('autoplay=1')>-1 or \
+                self.request.QUERY_STRING.lower().find('autoplay=1')>-1:
+            url += '?autoplay=1'
+        return url
