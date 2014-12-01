@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.0 (Unreleased)
+0.2.0 (2014-12-01)
 ------------------
 
 - Switched to new embed mode (using ``iframe``)
