@@ -6,19 +6,24 @@ version = '0.1.0'
 setup(name='collective.rtvideo.vimeo',
       version=version,
       description="The Vimeo Plone support for RedTurtle Video",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "HISTORY.rst")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
         "Framework :: Plone",
+        "Framework :: Plone :: 3.3",
+        "Framework :: Plone :: 4.0",
+        "Framework :: Plone :: 4.1",
+        "Framework :: Plone :: 4.2",
+        "Framework :: Plone :: 4.3",
         "Programming Language :: Python",
         "Topic :: Multimedia :: Video",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         ],
       keywords='plone plonegov video embed vimeo',
       author='RedTurtle Technology',
-      author_email='sviluppoplone@redturtle.net',
+      author_email='sviluppoplone@redturtle.it',
       url='http://plone.org/products/redturtle.video',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
