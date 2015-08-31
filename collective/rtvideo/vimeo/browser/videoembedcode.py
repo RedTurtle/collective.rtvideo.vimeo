@@ -23,7 +23,7 @@ class VimeoEmbedCode(VideoEmbedCode):
     ...     implements(IRTRemoteVideo)
     ...     remoteUrl = 'http://vimeo.com/2075738'
     ...     size = {'width': 400, 'height': 225}
-    ...     def getRemoteUrl(self):
+    ...     def getRemoteVideoURL(self):
     ...         return self.remoteUrl
     ...     def getWidth(self):
     ...         return self.size['width']
@@ -41,12 +41,21 @@ class VimeoEmbedCode(VideoEmbedCode):
 
     >>> print adapter()
     <div class="vimeoEmbedWrapper">
+    <BLANKLINE>
     <iframe width="400" height="225" frameborder="0"
             webkitallowfullscreen="webkitallowfullscreen"
             mozallowfullscreen="mozallowfullscreen"
             allowfullscreen="allowfullscreen"
             src="https://player.vimeo.com/video/2075738">
     </iframe>
+    <BLANKLINE>
+    <BLANKLINE>
+    <div class="removeVideoURL">
+        <a href="http://vimeo.com/2075738"
+           title="Open in a new window" target="_blank">
+            See video on Vimeo
+        </a>
+    </div>
     </div>
     <BLANKLINE>
 
@@ -61,6 +70,14 @@ class VimeoEmbedCode(VideoEmbedCode):
             allowfullscreen="allowfullscreen"
             src="https://player.vimeo.com/video/2075738?autoplay=1">
     </iframe>
+    <BLANKLINE>
+    <BLANKLINE>
+    <div class="removeVideoURL">
+        <a href="http://vimeo.com/2075738?autoplay=1"
+           title="Open in a new window" target="_blank">
+            See video on Vimeo
+        </a>
+    </div>
     </div>
     <BLANKLINE>
 
@@ -76,6 +93,14 @@ class VimeoEmbedCode(VideoEmbedCode):
             allowfullscreen="allowfullscreen"
             src="https://player.vimeo.com/video/2075738?autoplay=1">
     </iframe>
+    <BLANKLINE>
+    <BLANKLINE>
+    <div class="removeVideoURL">
+        <a href="http://vimeo.com/2075738"
+           title="Open in a new window" target="_blank">
+            See video on Vimeo
+        </a>
+    </div>
     </div>
     <BLANKLINE>
 
@@ -83,13 +108,13 @@ class VimeoEmbedCode(VideoEmbedCode):
     template = ViewPageTemplateFile('vimeoembedcode_template.pt')
 
     def getVideoLink(self):
-        video_id = urlparse(self.context.getRemoteUrl())[2][1:]
+        video_id = urlparse(self.context.getRemoteVideoURL())[2].split('/')[-1]
         video_url = "https://player.vimeo.com/video/%s" % video_id
         return self.check_autoplay(video_url)
 
     def check_autoplay(self, url):
         """Check if the we need to add the autoplay parameter, and add it to the URL"""
-        if self.context.getRemoteUrl().lower().find('autoplay=1')>-1 or \
+        if self.context.getRemoteVideoURL().lower().find('autoplay=1')>-1 or \
                 self.request.QUERY_STRING.lower().find('autoplay=1')>-1:
             url += '?autoplay=1'
         return url

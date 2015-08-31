@@ -1,11 +1,19 @@
 Changelog
 =========
 
-0.2.1 (unreleased)
+0.3.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fixed tests and testcase
+  [keul]
+- Fixed Vimeo support: URLs with "channel" info were not working
+  [keul]
+- Added a link to the remote video
+  [keul]
+- Added opt-out privacy support
+  [keul]
+- Templates updated to format required from redturtle.video >= 1.2.0
+  [keul]
 
 0.2.0 (2014-12-01)
 ------------------

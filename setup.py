@@ -1,7 +1,10 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.2.1.dev0'
+version = '0.3.0.dev0'
+
+tests_require=['zope.testing',
+               'Products.PloneTestCase']
 
 setup(name='collective.rtvideo.vimeo',
       version=version,
@@ -30,9 +33,11 @@ setup(name='collective.rtvideo.vimeo',
       namespace_packages=['collective', 'collective.rtvideo'],
       include_package_data=True,
       zip_safe=False,
+      tests_require=tests_require,
+      extras_require=dict(test=tests_require),
       install_requires=[
           'setuptools',
-          'redturtle.video>=0.6.0',
+          'redturtle.video>=1.2.0',
       ],
       entry_points="""
       # -*- Entry points: -*-

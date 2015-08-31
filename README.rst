@@ -24,3 +24,10 @@ You can enabled the Vimeo video autoplay in two ways:
   This is a user choice autoplay: who links the Plone content choose to auto
   start it.
 
+Privacy
+-------
+
+The remote video will not be show if a ``video-optout`` with value ``true`` is present, preventing
+Vimeo from sendings cookies to your users.
+
+This add-on (and neither RedTurtle Video) will not handle how this cookie is set.

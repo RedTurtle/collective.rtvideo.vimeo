@@ -1,12 +1,27 @@
-<div class="vimeoEmbedWrapper">
+<div class="vimeoEmbedWrapper"
+     i18n:domain="collective.rtvideo.vimeo"
+     tal:define="optout python:request.cookies.get('video-optout')=='true'">
+<tal:video condition="not:optout">
 <iframe width="500"
-		height="281"
+        height="281"
         frameborder="0"
-		webkitallowfullscreen="webkitallowfullscreen"
-		mozallowfullscreen="mozallowfullscreen"
+        webkitallowfullscreen="webkitallowfullscreen"
+        mozallowfullscreen="mozallowfullscreen"
         allowfullscreen="allowfullscreen"
         tal:attributes="width view/getWidth;
                         height view/getHeight;
                         src view/getVideoLink">
 </iframe>
+</tal:video>
+<p class="videoBlockedWarning"
+   tal:condition="optout" i18n:translate="optout_enabled">
+    Privacy settings prevents the video from being displayed.
+</p>
+<div class="removeVideoURL">
+    <a href="" title="Open in a new window" target="_blank"
+       i18n:attributes="title" i18n:translate=""
+       tal:attributes="href context/getRemoteVideoURL">
+        See video on Vimeo
+    </a>
+</div>
 </div>
